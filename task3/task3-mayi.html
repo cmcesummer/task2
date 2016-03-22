@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>杀人游戏身份发放</title>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        .container{
+            width:640px;
+            margin:0 auto;
+            padding-bottom: 20px;
+            background: #fafafa;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .container h1{
+            background: #29bde0;
+            padding:30px 0 30px 10px;
+            font-size:22px;
+            color:#fff;
+        }
+        #demo{
+            width:600px;
+            height: 400px;
+            margin:0 auto;
+            line-height:30px;
+            display:block;
+        }
+        #btn{
+            width:90%;
+            margin:20px auto;
+            padding: 2% 0;
+            display: block;
+            background: #fbb435;
+            color:#fff;
+            font-size: 30px;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .input{
+            margin-left:10px;
+            padding:10px;
+            font-size: 20px;
+        }
+        .row{
+            line-height:40px;
+            font-size:26px;
+        }
+        .row p{
+            font-size:20px;
+        }
+        .ID{
+            display: block;
+            width: 90%;
+            height: 600px;
+            border: 0;
+            padding: 10px;
+            margin: 20px auto;
+            line-height: 3rem;
+            font-size: 20px;
+            box-shadow: 0 0 1px 2px #eee;
+            overflow-y: scroll;
+            background: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="wrap">
+    <div class=" container">
+        <h1>杀人游戏简化版</h1>
+        <div class="row">
+            <p>此版本的最小人数为：6  最大人数为：18</p>
+            人数<input type="text" id="playerNum" class="input" placeholder="请输入玩家总人数"><br/>
+            <button id="btn" onclick="start()">发放身份</button>
+            <form id="demo" class="ID"></form>
+        </div>
+    </div>
+</div>
+<script>
+function start(){
+var x = parseInt(document.getElementById("playerNum").value);//取整
+if(x<6) {
+alert("玩家人数不能小于6个");
+} else if(x>18){
+alert("玩家人数最多为18个");
+}
+else {
+play();
+}}
+function play()
+{
+var playerArr= [];
+var x = parseInt(document.getElementById("playerNum").value); //vaule 可设置或返回输入框的默认值；parseInt 取整
+var y='';
+if(x<=18 && x>14){
+k= 4;
+} else if(x<=14 && x>12){
+k = 3;
+} else if(x<=12 && x>8){
+k = 2;
+} else if(x<=8 && x>=6){
+k = 1;
+}
+for(b=0;b<k;b++)
+{
+playerArr[b]="杀手"+"<br/>";
+}
+for(b=k;b<x;b++)
+{
+playerArr[b]="平民"+"<br\>";
+}
+playerArr.sort(function randomSort(){          //随机排序
+return Math.random()>.5 ? -1 : 1;//用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
+});
+for(var i=0; i<x; i++){       //数组初始化排序
+console.log((i+1)+playerArr[i]+"\n");
+y =y + (i+1)+"的身份是"+playerArr[i]+"\n";
+document.getElementById("demo").innerHTML=y;
+}
+}
+</script>
+</body>
+</html>
